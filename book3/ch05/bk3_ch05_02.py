@@ -1,17 +1,69 @@
 import numpy as np
+import matplotlib.pyplot as plt
 
-# define a column vector
-a_col = np.array([[1], [2], [3]])
 
-b_col = 2 * a_col
+def fig_decor(ax):
+    ax.set_xlabel('x')
+    ax.set_ylabel('y')
 
-# define a row vector
-a_row = np.array([[1, 2, 3]])
+    ax.hlines(y=0, xmin=-8, xmax=8, color='k')
+    ax.vlines(x=0, ymin=-8, ymax=8, color='k')
 
-b_row = 2 * a_row
+    ax.set_xticks(np.arange(-8, 8 + 1, step=1))
+    ax.set_yticks(np.arange(-8, 8 + 1, step=1))
 
-# define a matrix
-A = np.array([[1, 2, 3],
-              [4, 5, 6]])
+    ax.axis('scaled')
+    ax.grid(linestyle='--', linewidth=0.25, color=[0.5, 0.5, 0.5])
 
-B = 2 * A
+    ax.set_xbound(lower=-8, upper=8)
+    ax.set_ybound(lower=-8, upper=8)
+    ax.spines['top'].set_visible(False)
+    ax.spines['right'].set_visible(False)
+    ax.spines['bottom'].set_visible(False)
+    ax.spines['left'].set_visible(False)
+
+
+x_array = np.linspace(-8, 8)
+y_array = np.linspace(-8, 8)
+
+# orthogonal
+fig, ax = plt.subplots()
+
+y1 = 0.5 * x_array + 2
+y2 = -2 * x_array - 1
+
+ax.plot(x_array, y1)
+ax.plot(x_array, y2)
+fig_decor(ax)
+
+# parallel
+fig, ax = plt.subplots()
+
+y1 = 0.5 * x_array + 2
+y2 = 0.5 * x_array - 4
+
+ax.plot(x_array, y1)
+ax.plot(x_array, y2)
+fig_decor(ax)
+
+# horizontal
+fig, ax = plt.subplots()
+
+y1 = 0 * x_array + 2
+y2 = 0 * x_array - 4
+
+ax.plot(x_array, y1)
+# axhline
+ax.plot(x_array, y2)
+fig_decor(ax)
+
+# vertical
+fig, ax = plt.subplots()
+
+x1 = 0 * y_array + 2
+x2 = 0 * y_array - 4
+
+ax.plot(x1, y_array)
+# axvline
+ax.plot(x2, y_array)
+fig_decor(ax)

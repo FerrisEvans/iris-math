@@ -1,22 +1,37 @@
 import numpy as np
+import matplotlib.pyplot as plt
 
-# row vector dot product
+plt.rcParams["figure.figsize"] = [7.50, 3.50]
+plt.rcParams["figure.autolayout"] = True
 
-a_row = np.array([[1, 2, 3]])
-b_row = np.array([[4, 3, 2]])
+x_array = np.arange(0, 30 + 1, step=1)
+y_line_1 = 35 - x_array
+y_line_2 = (94 - 2 * x_array) / 4
 
-a_dot_b = np.inner(a_row, b_row)
+fig, ax = plt.subplots()
 
-print(a_dot_b)
-print(np.inner(a_row[:], b_row[:]))
-print(np.sum(a_row * b_row))
+plt.plot(x_array, y_line_1, color='#0070C0')
+plt.plot(x_array, y_line_2, color='g')
 
-# %% column vector dot product
+# solution of linear equations
+plt.plot(23, 12, marker='x', markersize=12)
+plt.axvline(x=23, color='r', linestyle='--')
+plt.axhline(y=12, color='r', linestyle='--')
 
-a_col = np.array([[1], [2], [3]])
-b_col = np.array([[-1], [0], [1]])
-
-a_dot_b = np.inner(a_col, b_col)
-print(a_dot_b)  # tensor product
-
-print(np.sum(a_col * b_col))
+plt.xlabel('$x_1$ (number of chickens)')
+plt.ylabel('$x_2$ (number of rabbits)')
+plt.axhline(y=0, color='k', linestyle='-')
+plt.axvline(x=0, color='k', linestyle='-')
+plt.xticks(np.arange(0, 30 + 1, step=5))
+plt.yticks(np.arange(0, 30 + 1, step=5))
+plt.axis('scaled')
+plt.minorticks_on()
+ax.grid(which='minor', linestyle=':',
+        linewidth='0.5', color=[0.8, 0.8, 0.8])
+ax.set_xlim(0, 30);
+ax.set_ylim(0, 30)
+ax.spines['top'].set_visible(False)
+ax.spines['right'].set_visible(False)
+ax.spines['bottom'].set_visible(False)
+ax.spines['left'].set_visible(False)
+ax.grid(linestyle='--', linewidth=0.25, color=[0.5, 0.5, 0.5])
